@@ -7,6 +7,7 @@ use sdl2::rect::Point;
 use sdl2::render::Canvas;
 use sdl2::video::Window;
 use std::time::Duration;
+use sdl2::keyboard::Keycode;
 
 const SCREEN_WIDTH: u32 = 640;
 const SCREEN_HEIGHT: u32 = 480;
@@ -115,7 +116,9 @@ fn main() -> Result<(), String> {
         // Handle events
         for event in event_pump.poll_iter() {
             match event {
-                Event::Quit { .. } => break 'running,
+                Event::Quit {..} | Event::KeyDown { keycode: Some(Keycode::Escape), .. } => {
+                    break 'running
+                },
                 _ => {}
             }
         }
